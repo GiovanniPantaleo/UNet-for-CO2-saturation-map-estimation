@@ -1,8 +1,21 @@
-# set the number of epochs
+# Load the datasets
+Xtrain3D = np.load('Xtrain3D.npy')
+Xtest3D = np.load('Xtest3D.npy')
+ytrain = np.load('ytrain.npy')
+ytest = np.load('ytest.npy')
+
+# In Xtrain3D and Xtest3D the shot gather images are in the first channel, while CWT images are in second channel
+Xtrainfor = Xtrain3D[:,:,:,0,:]
+Xtestfor = Xtest3D[:,:,:,0,:]
+Xtraincwt = Xtrain3D[:,:,:,1,:]
+Xtestcwt = Xtest3D[:,:,:,1,:]
+
+
+# Set the number of epochs
 n_epochs = 200
 
-# let's train the network
+# Let's train the network
 model, history, evaluation = train_unet2(Xtrainfor, Xtestfor, ytrain, ytest, n_epochs)
 
-# let's perform the prediction on test data
+# Let's perform the prediction on test data
 pred = model.predict(Xtest)

@@ -1,3 +1,7 @@
+# set the number of epochs
 n_epochs = 200
 
 model, history, evaluation = train_unet2(Xtrainfor, Xtestfor, ytrain, ytest, n_epochs)
+
+# let's perform the prediction on test data
+pred = model.predict(Xtest)

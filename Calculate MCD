@@ -1,0 +1,17 @@
+# Calculate MonteCarlo Dropout
+
+modelMCD = load_model('model.h5', compile=False)
+
+n_pred_iter = 20
+y_samples = np.stack([modelMCD(Xtestfor,training=True)
+                   for sample in range(n_pred_iter)])
+print(y_samples.shape)
+# the shape of y_samples will be [n_pred_iter, n_images, xsize, ysize, n_channels]
+
+
+# Calculate prediction mean and standard deviation
+y_samplesmean = np.mean(y_samples, axis=0)
+print(y_samplesmean.shape)
+y_samplesstd = np.std(y_samples, axis=0)
+print(y_samplesstd.shape)
+# the shape of y_samplesmean and y_samplesstd will be [n_images, xsize, ysize, n_channels]
